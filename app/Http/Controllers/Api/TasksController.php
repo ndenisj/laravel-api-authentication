@@ -8,11 +8,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskResource;
 use Carbon\Carbon;
 
+/**
+ * @group Task management
+ * 
+ * APIs for managing tasks
+ */
 class TasksController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * Display a listing of the tasks.
+     * @authenticated
+     * 
+     * @responseFile responses/tasks.get.json
+     * @responseFile 401 responses/401.json
+     * @responseFile 404 responses/404.json
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -22,7 +32,11 @@ class TasksController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @authenticated
+     * @bodyParam title string required Title of the task. Example: my first task
+     * @bodyParam description text Description of the task.
+     * @bodyParam due string Due date of the task. Example: next friday
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
